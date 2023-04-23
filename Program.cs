@@ -1,65 +1,63 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Stack_and_queue_Problems
 {
-    public class Node
+    class Node
     {
-        public int data;
-        public Node next;
+        public int Value;
+        public Node Next;
 
-        public Node(int data)
+        public Node(int value)
         {
-            this.data = data;
-            this.next = null;
+            Value = value;
+            Next = null;
         }
     }
 
-    public class Stack
+    class LinkedList
     {
-        private Node top;
+        private Node head;
 
-        public void Push(int data)
+        public void Append(int value)
         {
-            Node newNode = new Node(data);
-            if (top == null)
+            Node newNode = new Node(value);
+            if (head == null)
             {
-                top = newNode;
+                head = newNode;
             }
             else
             {
-                newNode.next = top;
-                top = newNode;
+                Node current = head;
+                while (current.Next != null)
+                {
+                    current = current.Next;
+                }
+                current.Next = newNode;
             }
         }
 
-        public int Pop()
+        public void PrintList()
         {
-            if (top == null)
+            Node current = head;
+            while (current != null)
             {
-                throw new InvalidOperationException("Stack is empty");
+                Console.WriteLine(current.Value);
+                current = current.Next;
             }
-            int data = top.data;
-            top = top.next;
-            return data;
-        }
-
-        public int Peek()
-        {
-            if (top == null)
-            {
-                throw new InvalidOperationException("Stack is empty");
-            }
-            return top.data;
-        }
-
-        public bool IsEmpty()
-        {
-            return top == null;
         }
     }
 
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            LinkedList linkedList = new LinkedList();
+            linkedList.Append(56);
+            linkedList.Append(30);
+            linkedList.Append(70);
+
+            linkedList.PrintList();
+        }
+    }
 }
+
+
