@@ -1,45 +1,45 @@
 using System;
 namespace Stack_and_queue_Problems
 {
-    class Node
+    class Node<T> where T : IComparable
     {
-        public int data;
-        public Node next;
+        public T data;
+        public Node<T> next;
 
-        public Node(int data)
+        public Node(T data)
         {
             this.data = data;
             this.next = null;
         }
     }
 
-    class OrderedList
+    class SortedLinkedList<T> where T : IComparable
     {
-        public Node head;
+        public Node<T> head;
 
-        public OrderedList()
+        public SortedLinkedList()
         {
             this.head = null;
         }
 
-        public void add(int data)
+        public void add(T data)
         {
-            Node newNode = new Node(data);
+            Node<T> newNode = new Node<T>(data);
 
             if (head == null)
             {
                 head = newNode;
             }
-            else if (data < head.data)
+            else if (data.CompareTo(head.data) < 0)
             {
                 newNode.next = head;
                 head = newNode;
             }
             else
             {
-                Node current = head;
+                Node<T> current = head;
 
-                while (current.next != null && current.next.data < data)
+                while (current.next != null && data.CompareTo(current.next.data) > 0)
                 {
                     current = current.next;
                 }
@@ -51,7 +51,7 @@ namespace Stack_and_queue_Problems
 
         public void printList()
         {
-            Node current = head;
+            Node<T> current = head;
 
             while (current != null)
             {
@@ -67,7 +67,7 @@ namespace Stack_and_queue_Problems
     {
         static void Main(string[] args)
         {
-            OrderedList list = new OrderedList();
+            SortedLinkedList<int> list = new SortedLinkedList<int>();
             list.add(56);
             list.add(30);
             list.add(40);
